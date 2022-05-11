@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
+    <link rel="stylesheet" href="/styles.css">
+
+</head>
+
+
+
+<body>
+    <h1> Favorit Movie list</h1>
+    
+<!-- nav button to come back to home page-->
+<nav>
+  <a class="home" href="/"><button style= "background: rgb(21, 83, 80)">Home</button></a>
+  <br>
+</nav>
+
+
+
+
+
+ <!-- action is which route to send the form data.
+method="post" is required when sending data 
+to the server -->
+<form action="/add-movie" method="post">
+<!-- input MUST have the name attribute
+to enable getting the value in the route -->
+<input name="title"  type= "text" placeholder="title" autocomplete="off" required>
+<input name="genre" type="text" placeholder="genre"  autocomplete="off" required>
+<input name="length" type= "number" placeholder="length" autocomplete="off" required>
+<input name="link"  type="url" placeholder="link" autocomplete="off" >
+<br>
+<button style= "background: green">Add Movie</button>
+</form>
+
+
+
+
+
+<!-- loop through a list -->
+<!-- loop is a special object that only exists
+in a template for loop -->
+
+
+ {% for movie in movies%}
+  <div style="width: 200px; display: inline-block;" id="movie-column" >
+    <img src="{{movie['link']}}" alt="" id="image">
+    <h4><b>Movie : {{movie['title']}}</b></h4> 
+    <p>genre: {{movie['genre']}}</p> 
+    <p>length:{{movie['length']}}</p>
+    <!-- a-tag is always a GET -->
+    <p> <a id="remove" href="/remove/{{movie.id}}" <button id=" remove-id" style= "background: red" font-size="30px">Remove🗑️</button></a></p>
+  </div>
+{%endfor%} 
+<!-- must close the for loop -->
+
+
+
+<div class= "search" >
+<!-- input MUST have the name attribute
+  to enable getting the value in the route -->
+  <form action="/search" method="post">
+    <br>
+    <input name="title" placeholder=" Search by Title">
+    <button style= "background: rgb(21, 83, 54)">Search</button>
+  </form>
+</div>
+
+
+
+<div class= "sort">   
+<!-- input MUST have the name attribute
+ to enable getting the value in the route -->
+  <form action="/sort" method="post">
+    <br>
+  <button style= "background: rgb(71, 5, 36)">Sort by Title</button>
+  </form>
+</div>
+
+</body>
+</html>
